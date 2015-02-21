@@ -8,8 +8,8 @@ module.exports = function(grunt) {
         files: [
           {
             expand: true,
-            cwd: 'src', 
-            src: ['css/*', 'fonts/*', 'img/*', 'js/vendor/*', 'js/rubberduck.min.js', '!jsx/', 'favicon.ico', 'index.html'], 
+            cwd: 'src',
+            src: ['css/*', 'fonts/*', 'img/*', 'js/vendor/*', 'js/rubberduck.min.js', '!jsx/', 'favicon.ico', 'index.html'],
             dest: 'build/'
           }
         ]
@@ -18,7 +18,7 @@ module.exports = function(grunt) {
     react: {
       single_file_output: {
         files: {
-          'web/js/songlist.js': 'src/jsx/FilterableSongList.jsx'
+          'web/assets/js/songlist.js': 'web/assets/jsx/FilterableSongList.jsx'
         }
       }
     },
