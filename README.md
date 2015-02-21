@@ -3,7 +3,7 @@
 ## To run:
 
 - Clone the repo (natch)
-- `cd mediasite-silex`
+- `cd mediasite`
 - `composer install`
 - `npm install`
 
