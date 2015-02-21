@@ -1,10 +1,10 @@
 {
-  "name": "mediasite-js",
+  "name": "mediasite-silex",
   "description": "New media site for CDAC",
   "author": "Graham Holtslander <menello@gmail.com>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/gholtsla/mediasite-js"
+    "url": "https://github.com/gholtsla/mediasite-silex.git"
   },
   "version": "0.1.0",
   "devDependencies": {
