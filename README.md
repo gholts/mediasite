@@ -1,4 +1,4 @@
-# mediasite-silex
+# mediasite
 
 ## To run:
 
