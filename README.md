@@ -6,6 +6,8 @@
 - `cd mediasite`
 - `composer install`
 - `npm install`
+- `grunt`
+- `grunt watch` (to compile scss and jsx on the fly)
 
 ## Requirements:
 
