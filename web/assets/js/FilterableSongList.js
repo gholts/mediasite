@@ -47,20 +47,20 @@
   //   }
   // });
 
-  var Song = React.createClass({
+  var Song = React.createClass({displayName: "Song",
     render: function() {
       var songUrl = "/song/" + this.props.songId;
       return (
-        <div className="col-md-3 song">
-          <h2><a href={songUrl}>{this.props.title}</a></h2>
-          <h3>{this.props.author1}</h3>
-          <h3>{this.props.author2}</h3>
-        </div>
+        React.createElement("div", {className: "col-md-3 song"}, 
+          React.createElement("h2", null, React.createElement("a", {href: songUrl}, this.props.title)), 
+          React.createElement("h3", null, this.props.author1), 
+          React.createElement("h3", null, this.props.author2)
+        )
       )
     }
   });
 
-  var SongGroup = React.createClass({
+  var SongGroup = React.createClass({displayName: "SongGroup",
     render: function() {
       var filterText = this.props.filterText;
       var songs = _.map(this.props.songs, function(song) {
@@ -68,23 +68,23 @@
             song.cell[0].indexOf(filterText) === -1) {
           return;
         }
-        return <Song key={song.id}
-                     songId={song.id}
-                     title={song.cell[0]}
-                     author1={song.cell[1]}
-                     authro2={song.cell[2]} />;
+        return React.createElement(Song, {key: song.id, 
+                     songId: song.id, 
+                     title: song.cell[0], 
+                     author1: song.cell[1], 
+                     authro2: song.cell[2]});
       });
 
       return (
-        <div className="row songGroup">
-          {songs}
-        </div>
+        React.createElement("div", {className: "row songGroup"}, 
+          songs
+        )
       );
     }
   });
 
 
-  var SearchBar = React.createClass({
+  var SearchBar = React.createClass({displayName: "SearchBar",
     handleChange: function() {
       this.props.onUserInput(
         this.refs.filterTextInput.getDOMNode().value
@@ -92,23 +92,23 @@
     },
     render: function() {
       return(
-        <form>
-          <div className="form-group">
-            <input
-                type="text"
-                placeholder="Search..."
-                ref="filterTextInput"
-                value={this.props.filterText}
-                onChange={this.handleChange}
-                className="form-control"
-            />
-          </div>
-        </form>
+        React.createElement("form", null, 
+          React.createElement("div", {className: "form-group"}, 
+            React.createElement("input", {
+                type: "text", 
+                placeholder: "Search...", 
+                ref: "filterTextInput", 
+                value: this.props.filterText, 
+                onChange: this.handleChange, 
+                className: "form-control"}
+            )
+          )
+        )
       );
     }
   });
 
-  var FilterableSongTable = React.createClass({
+  var FilterableSongTable = React.createClass({displayName: "FilterableSongTable",
     componentDidMount: function() {
       this.getSongsAndSetState();
     },
@@ -146,17 +146,17 @@
     },
     render: function() {
       return (
-        <div>
-          <SearchBar filterText={this.state.filterText}
-                     onUserInput={this.handleUserInput} />
-          <SongGroup songs={this.state.songData}
-                     filterText={this.state.filterText}
-                     totalSongCount={this.state.totalSongs} />
-        </div>
+        React.createElement("div", null, 
+          React.createElement(SearchBar, {filterText: this.state.filterText, 
+                     onUserInput: this.handleUserInput}), 
+          React.createElement(SongGroup, {songs: this.state.songData, 
+                     filterText: this.state.filterText, 
+                     totalSongCount: this.state.totalSongs})
+        )
       );
     }
   });
 
-  React.render(<FilterableSongTable url="/api/songs/search" />, document.getElementById("song-area"));
+  React.render(React.createElement(FilterableSongTable, {url: "/api/songs/search"}), document.getElementById("song-area"));
 
 })(this.React, this.$, this._);

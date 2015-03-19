@@ -18,7 +18,17 @@ module.exports = function(grunt) {
     react: {
       single_file_output: {
         files: {
-          'web/assets/js/songlist.js': 'web/assets/jsx/FilterableSongList.jsx'
+          'web/assets/js/FilterableSongList.js': 'web/assets/jsx/FilterableSongList.jsx'
+        }
+      }
+    },
+    sass: {
+      dist: {
+        options: {
+          style: 'nested'
+        },
+        files: {
+          'web/assets/css/main.css': 'app/Resources/scss/main.scss'
         }
       }
     },
@@ -31,14 +41,19 @@ module.exports = function(grunt) {
     },
     watch: {
       react: {
-        files: 'src/jsx/FilterableSongList.jsx',
+        files: 'web/assets/jsx/FilterableSongList.jsx',
         tasks: ['react']
+      },
+      sass: {
+        files: 'app/Resources/scss/**/*.scss',
+        tasks: ['sass']
       }
     }
   });
 
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-react');

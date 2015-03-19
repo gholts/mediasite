@@ -7,3 +7,6 @@ app/cache/*
 !app/logs/.gitkeep
 app/logs/*
 web/bundles/*
+.sass-cache/*
+web/assets/css/*
+.jsbeautifyrc

@@ -13,10 +13,6 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-        $api = new MediaSite();
-
-        $song = $api->getSongById("135");
-        $songs = $api->getSongs();
-        return $this->render('index.html.twig', ["title" => "Hey", "song" => $song, "songs" => $songs]);
+        return $this->render('index.html.twig', ["title" => "CDAC Media Site"]);
     }
 }

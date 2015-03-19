@@ -5,7 +5,9 @@
 {% endblock %}
 
 {% block content %}
-{{ dump(song) }}
-{{ dump(songs) }}
 <div id="song-area"></div>
+{% endblock %}
+
+{% block javascripts %}
+<script src="/assets/js/FilterableSongList.js"></script>
 {% endblock %}
