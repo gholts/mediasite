@@ -1,5 +1,7 @@
 <?php
 
+date_default_timezone_set("America/Regina");
+
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Config\Loader\LoaderInterface;
 

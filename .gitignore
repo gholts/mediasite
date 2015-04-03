@@ -10,3 +10,4 @@ web/bundles/*
 .sass-cache/*
 web/assets/css/*
 .jsbeautifyrc
+app/*.cache
