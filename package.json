@@ -1,13 +1,14 @@
 {
-  "name": "mediasite-silex",
+  "name": "mediasite",
   "description": "New media site for CDAC",
   "author": "Graham Holtslander <menello@gmail.com>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/gholtsla/mediasite-silex.git"
+    "url": "https://github.com/gholtsla/mediasite.git"
   },
   "version": "0.1.0",
   "devDependencies": {
+    "css-loader": "^0.9.1",
     "grunt": "^0.4.5",
     "grunt-browserify": "^3.3.0",
     "grunt-contrib-clean": "^0.6.0",
@@ -16,6 +17,12 @@
     "grunt-contrib-uglify": "^0.7.0",
     "grunt-contrib-watch": "^0.6.1",
     "grunt-react": "^0.10.0",
-    "webpack": "^1.5.3"
+    "jsx-loader": "^0.12.2",
+    "react": "^0.13.1",
+    "react-hot-loader": "^1.2.3",
+    "sass-loader": "^0.5.0",
+    "style-loader": "^0.8.3",
+    "webpack": "^1.7.3",
+    "webpack-dev-server": "^1.7.0"
   }
 }
