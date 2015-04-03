@@ -11,3 +11,5 @@ web/bundles/*
 web/assets/css/*
 .jsbeautifyrc
 app/*.cache
+web/assets/FilterableSongList.js
+web/assets/bundle.js

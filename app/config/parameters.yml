@@ -12,3 +12,4 @@ parameters:
     mailer_password: null
     locale: en
     secret: ThisTokenIsNotSoSecretChangeIt
+    assets_base_url: "http://localhost:8080"
