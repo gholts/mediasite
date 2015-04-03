@@ -1,5 +1,6 @@
-"use strict";
+'use strict';
 
+var $ = require('./vendor/jquery-1.11.2.min.js');
 var React = require('./vendor/react.min.js');
 var _ = require('./vendor/underscore-min.js');
 
@@ -57,4 +58,4 @@ var FilterableSongTable = React.createClass({
   }
 });
 
-React.render(<FilterableSongTable url="/api/songs/search" />, document.getElementById("song-area"));
+React.render(<FilterableSongTable url='/api/songs/search' />, document.getElementById('song-area'));
