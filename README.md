@@ -6,10 +6,11 @@
 - `cd mediasite`
 - `composer install`
 - `npm install`
-- `grunt`
-- `grunt watch` (to compile scss and jsx on the fly)
+- `webpack`
+- `webpack -w` (to compile everything on the fly!)
 
 ## Requirements:
 
+- PHP >= 5.4
 - Node/npm
 - Composer
