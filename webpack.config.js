@@ -1,9 +1,9 @@
 module.exports = {
-    entry   : "./web/js/app.jsx",
+    entry: "./web/js/app.jsx",
     output: {
         filename: "FilterableSongList.js",
-        path : 'web/assets/',
-        publicPath : '/assets/',
+        path: 'web/assets/',
+        publicPath: '/assets/',
     },
     module: {
         loaders: [
@@ -13,4 +13,4 @@ module.exports = {
     },
     externals: {'react': 'React'},
     resolve: {extensions: ['', '.js', '.jsx']}
-}
+};

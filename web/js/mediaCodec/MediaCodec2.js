@@ -1,3 +1,4 @@
+/* @flow */
 //*************************************************************************************************************//
 //    Media Site encoder/decoder for song data == JavaScript Port                                              //
 //*************************************************************************************************************//
@@ -65,23 +66,17 @@ function song(config, id, title, pSongKey) {
     switch (pEncodeTo) {
       case ENCODETYPE.HTML:
         return encodeHTML(pJsonData, OBJECTTYPE.song, transposeObj);
-        break;
       case ENCODETYPE.PlainText:
         return encodePlainText(pJsonData, OBJECTTYPE.song, true);
-        break;
       case ENCODETYPE.PlainTextLyric:
         return encodePlainText(pJsonData, OBJECTTYPE.song, false);
-        break;
       case ENCODETYPE.Legacy:
         return encodeLegacy(pJsonData, OBJECTTYPE.song);
-        break;
       case ENCODETYPE.Json:
         return pJsonData;
-        break;
       case ENCODETYPE.XML:
         return encodeXML(pJsonData, OBJECTTYPE.song, this);
-        break;
-    };
+    }
   };
 
   function encodeLegacy(pJsonData, pObjectType) {
@@ -105,7 +100,7 @@ function song(config, id, title, pSongKey) {
             partLineArr.push(encodeLegacy(this, OBJECTTYPE.songLyricLine));
           } else {
             partLineArr.push(encodeLegacy(this, OBJECTTYPE.songNoteLine));
-          };
+          }
         });
         retData = "<" + pJsonData.partName + ">" + partLineArr.join('<NL>') + "</" + pJsonData.partName + ">";
         break;
@@ -123,7 +118,7 @@ function song(config, id, title, pSongKey) {
         break;
     }
     return retData;
-  };
+  }
 
   function encodeXML(pJsonData, pObjectType, root) {
     var retData = "";
@@ -141,10 +136,10 @@ function song(config, id, title, pSongKey) {
         jQuery.each(pJsonData.partData, function() {
           if (typeof this.lyric !== "undefined") {
             retData += encodeXML(this, OBJECTTYPE.songLyricLine);
-          };
+          }
           if (typeof this.note !== "undefined") {
             retData += encodeXML(this, OBJECTTYPE.songNoteLine);
-          };
+          }
         });
         break;
       case OBJECTTYPE.songLyricLine:
@@ -159,7 +154,7 @@ function song(config, id, title, pSongKey) {
         break;
     }
     return retData;
-  };
+  }
 
   function encodePlainText(pJsonData, pObjectType, includeNotes) {
     var retData = "";
@@ -183,7 +178,7 @@ function song(config, id, title, pSongKey) {
             partLineArr.push(encodePlainText(this, OBJECTTYPE.songLyricLine, includeNotes));
           } else {
             partLineArr.push(encodePlainText(this, OBJECTTYPE.songNoteLine, includeNotes));
-          };
+          }
         });
         retData = partLineArr.join(vbCrLf);
         break;
@@ -191,7 +186,7 @@ function song(config, id, title, pSongKey) {
         retData = pJsonData.lyric;
         break;
       case OBJECTTYPE.songNoteLine:
-        if (includeNotes == true) {
+        if (includeNotes === true) {
           var line = Array(150).join(" ");
           jQuery.each(pJsonData.note, function() {
             var note = this.note;
@@ -207,8 +202,7 @@ function song(config, id, title, pSongKey) {
     }
 
     return retData;
-
-  };
+  }
 
   function encodeHTML(pJsonData, pObjectType, pTransposeObj) {
     var retData = "";
@@ -228,10 +222,10 @@ function song(config, id, title, pSongKey) {
         jQuery.each(pJsonData.partData, function() {
           if (typeof this.lyric !== "undefined") {
             partLineArr.push(encodeHTML(this, OBJECTTYPE.songLyricLine, pTransposeObj));
-          };
+          }
           if (typeof this.note !== "undefined") {
             partLineArr.push(encodeHTML(this, OBJECTTYPE.songNoteLine, pTransposeObj));
-          };
+          }
         });
         retData += partLineArr.join('<br/>');
         retData += "</div>";
@@ -246,7 +240,7 @@ function song(config, id, title, pSongKey) {
         jQuery.each(pJsonData.note, function() {
           var note = this.note;
           var position = parseInt(this.position);
-          if (pTransposeObj.numTransposeVal == 0) {
+          if (pTransposeObj.numTransposeVal === 0) {
             line = replaceAt(line, position, note);
           } else {
             line = replaceAt(line, position, encodeHTML(note, OBJECTTYPE.songNote, pTransposeObj));
@@ -260,8 +254,7 @@ function song(config, id, title, pSongKey) {
         break;
       case OBJECTTYPE.songNote:
         return pTransposeObj.transposeNote(pJsonData);
-        break;
-    };
+    }
 
     return retData;
   }
@@ -274,14 +267,11 @@ function song(config, id, title, pSongKey) {
     switch (pDecodeFrom) {
       case ENCODETYPE.Legacy:
         return decodeLegacy(pDataStream, OBJECTTYPE.song, this);
-        break;
       case ENCODETYPE.XML:
         return decodeXML(pDataStream, OBJECTTYPE.song, this);
-        break;
       case ENCODETYPE.PlainText:
         return decodePlainText(pDataStream, OBJECTTYPE.song, this);
-        break;
-    };
+    }
   };
 
   function decodeXML(pData, pObjectType, root) {
@@ -295,7 +285,7 @@ function song(config, id, title, pSongKey) {
           key: root.config.key,
           partCount: 0,
           parts: []
-        }
+        };
         var xmlDoc = $($.parseXML(pData));
         var xmlNode = xmlDoc.find(XMLTAGS.song);
         retData.id = parseInt(xmlNode.attr("SongID"));
@@ -345,11 +335,11 @@ function song(config, id, title, pSongKey) {
         retData.position = parseInt(pData.attr(XMLTAGS.xpos));
         retData.note = pData.text();
         break;
-    };
+    }
 
     return retData;
 
-  };
+  }
 
   function decodeLegacy(pData, pObjectType, root) {
     var retData = {};
@@ -362,7 +352,7 @@ function song(config, id, title, pSongKey) {
           key: root.config.key,
           partCount: 0,
           parts: []
-        }
+        };
 
         //'Extract Header
         var header = pData.substring(1, (pData.indexOf(">")));
@@ -384,7 +374,7 @@ function song(config, id, title, pSongKey) {
             partName: temp,
             partEncodedData: pData.substring(start, endTagPos)
           }, OBJECTTYPE.songPart));
-        };
+        }
         break;
       case OBJECTTYPE.songPart:
         retData = {
@@ -392,13 +382,13 @@ function song(config, id, title, pSongKey) {
           partData: []
         };
         var lineArr = pData.partEncodedData.split('<NL>');
-        for (var i = 0; i < lineArr.length; i++) {
+        for (i = 0; i < lineArr.length; i++) {
           if (lineArr[i].indexOf("<") > -1 && lineArr[i].indexOf(">") > -1) {
             retData.partData.push(decodeLegacy(lineArr[i], OBJECTTYPE.songNoteLine));
           } else {
             retData.partData.push(decodeLegacy(lineArr[i], OBJECTTYPE.songLyricLine));
           }
-        };
+        }
         break;
       case OBJECTTYPE.songLyricLine:
         retData = {
@@ -411,14 +401,14 @@ function song(config, id, title, pSongKey) {
           note: []
         };
         var noteArr = pData.split(">");
-        for (var i = 0; i < noteArr.length; i++) {
+        for (i = 0; i < noteArr.length; i++) {
           temp = noteArr[i].trim();
           temp = replaceAll("<", "", temp);
           noteItemArr = temp.split(",");
           if (temp !== '') {
             retData.note.push(decodeLegacy(noteItemArr, OBJECTTYPE.songNote));
-          };
-        };
+          }
+        }
         break;
       case OBJECTTYPE.songNote:
         retData = {
@@ -428,11 +418,10 @@ function song(config, id, title, pSongKey) {
         retData.position = pData[1];
         retData.note = pData[0];
         break;
-    };
+    }
 
     return retData;
-
-  };
+  }
 
   function decodePlainText(pData, pObjectType, root) {
     var retData = {};
@@ -445,14 +434,14 @@ function song(config, id, title, pSongKey) {
           key: 'C',
           partCount: pData.partName.length,
           parts: []
-        }
+        };
 
         for (var i = 0; i < pData.partData.length; i++) {
           retData.parts.push(decodePlainText({
             partName: pData.partName[i],
             partData: pData.partData[i]
           }, OBJECTTYPE.songPart, root));
-        };
+        }
         break;
       case OBJECTTYPE.songPart:
         retData = {
@@ -460,7 +449,7 @@ function song(config, id, title, pSongKey) {
           partData: []
         };
         var lineArr = pData.partData.split(vbCrLf);
-        for (var i = 0; i < lineArr.length; i++) {
+        for (i = 0; i < lineArr.length; i++) {
           var bLegal = true;
 
           for (var j = 0; j < lineArr[i].length; j++) {
@@ -474,9 +463,9 @@ function song(config, id, title, pSongKey) {
             retData.partData.push(decodePlainText(lineArr[i], OBJECTTYPE.songNoteLine, root));
           } else {
             retData.partData.push(decodePlainText(lineArr[i], OBJECTTYPE.songLyricLine, root));
-          };
+          }
 
-        };
+        }
         break;
       case OBJECTTYPE.songLyricLine:
         retData = {
@@ -512,11 +501,11 @@ function song(config, id, title, pSongKey) {
                 pos1 = pos2;
                 temp = '';
                 break;
-              };
+              }
 
             }
 
-          };
+          }
 
 
           if (temp !== '') {
@@ -525,15 +514,15 @@ function song(config, id, title, pSongKey) {
               position: pos1
             });
             pos1 = pos2;
-          };
+          }
 
-        };
+        }
 
         break;
-    };
+    }
 
     return retData;
-  };
+  }
 
   //*****************************************************************************************************************//
   // Library Functions //
@@ -541,11 +530,11 @@ function song(config, id, title, pSongKey) {
 
   function replaceAll(find, replace, str) {
     return str.replace(new RegExp(find, 'g'), replace);
-  };
+  }
 
   function replaceAt(myString, index, character) {
     return myString.substr(0, index) + character + myString.substr(index + character.length);
-  };
+  }
 
 
 }
@@ -595,27 +584,27 @@ function transposer(pKey, pTransposeKey) {
       return 0;
     }
 
-    for (var i = 0; i < 12; i++) {
+    for (i = 0; i < 12; i++) {
       if (noteArray1[i].toUpperCase() == pSongKey.toUpperCase()) {
-        num1 = i
-      };
+        num1 = i;
+      }
       if (noteArray2[i].toUpperCase() == pSongKey.toUpperCase()) {
-        num1 = i
-      };
+        num1 = i;
+      }
 
       if (noteArray1[i].toUpperCase() == pTransposeKey.toUpperCase()) {
-        num2 = i
-      };
+        num2 = i;
+      }
 
       if (noteArray2[i].toUpperCase() == pTransposeKey.toUpperCase()) {
-        num2 = i
-      };
+        num2 = i;
+      }
 
-    };
+    }
 
     return (num2 - num1);
 
-  };
+  }
 
 
   this.transposeNote = function(pNote) {
@@ -627,9 +616,9 @@ function transposer(pKey, pTransposeKey) {
     var bNoteFound;
     var noteNumVal;
 
-    if (pNote == '') {
+    if (pNote === '') {
       return;
-    };
+    }
 
     for (var i = 0; i < 12; i++) {
       if (noteArray1[i].toUpperCase() == pNote.toUpperCase()) {
@@ -647,13 +636,13 @@ function transposer(pKey, pTransposeKey) {
     }
 
     //'Simple Note Case --- Transpose & we're done
-    if (bNoteFound == true) {
-      if (track == 0) {
+    if (bNoteFound === true) {
+      if (track === 0) {
         return noteArray1[wrapNoteVal(noteNumVal, pShiftKeyVal)];
       } else {
         return noteArray2[wrapNoteVal(noteNumVal, pShiftKeyVal)];
-      };
-    };
+      }
+    }
 
 
 
@@ -663,14 +652,14 @@ function transposer(pKey, pTransposeKey) {
       var noteArr = pNote.split("/");
       var retAry = [];
 
-      for (var i = 0; i < noteArr.length; i++) {
+      for (i = 0; i < noteArr.length; i++) {
         retAry.push(getTransposedNote(noteArr[i], pShiftKeyVal, noteArray1, noteArray2));
       }
 
       return retAry.join("/");
     }
 
-    var notes = 'ABCDEFG'
+    var notes = 'ABCDEFG';
     var flatSharp = "#b";
 
     //'Note with minor, aug, sus, 7
@@ -680,22 +669,22 @@ function transposer(pKey, pTransposeKey) {
       //'Check for "#" or "b"
 
       if (flatSharp.indexOf(pNote.substring(1, 2)) > -1) {
-        return getTransposedNote(pNote.substring(0, 2), pShiftKeyVal, noteArray1, noteArray2) + pNote.substring(2)
+        return getTransposedNote(pNote.substring(0, 2), pShiftKeyVal, noteArray1, noteArray2) + pNote.substring(2);
       } else {
-        return getTransposedNote(pNote.substring(0, 1), pShiftKeyVal, noteArray1, noteArray2) + pNote.substring(1)
-      };
+        return getTransposedNote(pNote.substring(0, 1), pShiftKeyVal, noteArray1, noteArray2) + pNote.substring(1);
+      }
     }
     //'Flag as Error
     return '{!}';
 
-  };
+  }
 
   function wrapNoteVal(pNoteVal, pShiftVal) {
     if ((pNoteVal + pShiftVal) < 12) {
       return (pNoteVal + pShiftVal);
     } else {
       return (pNoteVal + pShiftVal) - 12;
-    };
-  };
+    }
+  }
 
 }
