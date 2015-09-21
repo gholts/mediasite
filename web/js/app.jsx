@@ -25,12 +25,12 @@ var FilterableSongTable = React.createClass({
     $.ajax({
       url: this.props.url + '?searchText=' + filterText,
       dataType: 'json',
-      success: function(data) {
+      success: (data) => {
         this.setState({
           songData: data.rows,
           totalSongs: data.records
         });
-      }.bind(this),
+      },
       error: function(xhr, status, err) {
         console.error(this.props.url, status, err.toString());
       }.bind(this)
