@@ -7,15 +7,24 @@
     "url": "https://github.com/gholts/mediasite.git"
   },
   "version": "0.1.0",
+  "scripts": {
+      "test": "jest"
+  },
   "devDependencies": {
+    "babel-jest": "*",
     "css-loader": "^0.9.1",
+    "jest-cli": "^0.5.7",
     "jsx-loader": "^0.13.1",
     "node-sass": "^3.0.0-beta.4",
-    "react": "^0.13.1",
+    "react": "*",
     "react-hot-loader": "^1.2.3",
     "sass-loader": "^1.0.1",
     "style-loader": "^0.9.0",
     "webpack": "^1.7.3",
     "webpack-dev-server": "^1.7.0"
+  },
+  "jest": {
+    "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",
+    "unmockedModulePathPatterns": ["<rootDir>/node_modules/react"]
   }
 }
